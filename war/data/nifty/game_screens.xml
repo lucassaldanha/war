@@ -1,0 +1,806 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty-1.3.xsd http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+
+	<useStyles filename="nifty-default-styles.xml" />
+	<useControls filename="nifty-default-controls.xml" />
+	<!-- <registerSound id="music" filename="./data/sound/160358__qubodup__us-army-firefight-training.ogg"/> -->
+
+	<!-- <label> -->
+	<!-- <effect> -->
+	<!-- <onClick name="playSound" sound="myclick"/> -->
+	<!-- </effect> -->
+	<!-- </label> -->
+
+	<!-- Tela Inicial -->
+
+	<screen id="start" controller="war.ui.controller.StartGameScreenController">
+		<layer id="background" childLayout="center">
+			<panel width="100%" height="100%" backgroundImage="./data/menu/initial/background.jpg">
+			</panel>
+		</layer>
+
+		<layer id="start_menu_layer" childLayout="vertical">
+			<effect>
+				<onStartScreen name="fade" />
+			</effect>
+			<!-- <effect> -->
+			<!-- <onStartScreen sound="music" startDelay="1000"/> -->
+			<!-- </effect> -->
+
+			<panel id="top_panel" height="80px" childLayout="horizontal"
+				valign="top">
+				<panel width="90%" height="100%" childLayout="center" align="left">
+				</panel>
+				<panel width="10%" height="100%" childLayout="center" align="right">
+					<image id="sound" filename="./data/menu/initial/button_sound_on.png">
+						<interact onClick="setSound()" />
+					</image>
+				</panel>
+			</panel>
+
+			<panel id="mid_panel" height="190px" valign="center"
+				childLayout="center" />
+
+			<panel id="bottom_panel" width="120px" height="204px"
+				childLayout="horizontal" align="center">
+				<panel width="100%" height="100%" childLayout="vertical"
+					align="center">
+					<panel width="100%" height="36px" childLayout="center">
+						<effect>
+							<onStartScreen name="move" timeType="exp" factor="0.5"
+								direction="left" mode="in" length="500" inherit="true" />
+							<onEndScreen name="move" timeType="exp" factor="0.5"
+								direction="right" mode="out" length="750" inherit="true" />
+						</effect>
+						<image id="play" filename="./data/menu/initial/button_play.png">
+							<effect>
+								<onStartHover name="nop" onStartEffect="setPlay()" />
+								<onEndHover name="nop" onStartEffect="setPlay()" />
+							</effect>
+							<interact onClick="configureGame()" />
+						</image>
+						
+					</panel>
+					<panel height="20px" align="center" childLayout="center" />
+					<panel width="100%" height="36px" childLayout="center">
+						<effect>
+							<onStartScreen name="move" timeType="exp" factor="0.5"
+								direction="left" mode="in" length="750" inherit="true" />
+							<onEndScreen name="move" timeType="exp" factor="0.5"
+								direction="right" mode="out" length="1000" inherit="true" />
+						</effect>
+						<image id="help" filename="./data/menu/initial/button_help.png">
+						    <effect>
+								<onStartHover name="nop" onStartEffect="setHelp()" />
+								<onEndHover name="nop" onStartEffect="setHelp()" />
+							</effect>
+							<interact onClick="showHelp()" />
+						</image>
+					</panel>
+					<panel height="20px" align="center" childLayout="center" />
+					<panel width="100%" height="36px" childLayout="center">
+						<effect>
+							<onStartScreen name="move" timeType="exp" factor="0.5"
+								direction="left" mode="in" length="1000" inherit="true" />
+							<onEndScreen name="move" timeType="exp" factor="0.5"
+								direction="right" mode="out" length="1250" inherit="true" />
+						</effect>
+						<image id="credits" filename="./data/menu/initial/button_credits.png">
+							 <effect>
+								<onStartHover name="nop" onStartEffect="setCredits()" />
+								<onEndHover name="nop" onStartEffect="setCredits()" />
+							</effect>
+							<interact onClick="showCredits()" />
+						</image>
+					</panel>
+					<panel height="20px" align="center" childLayout="center" />
+					<panel width="100%" height="36px" childLayout="center">
+						<effect>
+							<onStartScreen name="move" timeType="exp" factor="0.5"
+								direction="left" mode="in" length="1250" inherit="true" />
+							<onEndScreen name="move" timeType="exp" factor="0.5"
+								direction="right" mode="out" length="1500" inherit="true" />
+						</effect>
+						<image id="exit" filename="./data/menu/initial/button_exit.png">
+						     <effect>
+								<onStartHover name="nop" onStartEffect="setExit()" />
+								<onEndHover name="nop" onStartEffect="setExit()" />
+							</effect>
+							<interact onClick="exitGame()" />
+						</image>
+					</panel>
+				</panel>
+			</panel>
+
+		</layer>
+	</screen>
+
+	<!-- Tela de Jogo -->
+
+	<screen id="in_game" controller="war.ui.controller.InGameScreenController">
+		<layer id="gui" childLayout="vertical">
+
+			<panel id="top_panel" height="150px" valign="top" childLayout="center">
+				<panel childLayout="center" paddingTop="1px">
+					<image id="flap" filename="./data/menu/statistic/flap_down.png"
+						align="center" valign="top">
+						<interact onClick="showStatistics()" />
+					</image>
+
+					<panel childLayout="center">
+						<panel childLayout="center">
+							<image id="statistics" filename="./data/menu/statistic/background.png"
+								visible="false" />
+						</panel>
+
+						<!-- Estatísticas -->
+						<panel childLayout="horizontal" paddingLeft="60px">
+							<panel width="15%" childLayout="horizontal" paddingLeft="30px">
+								<panel width="25%" childLayout="center">
+									<image id="army_black_stat" filename="./data/army/standby_army_black_clear.png"
+										visible="false" />
+								</panel>
+								<panel width="25%" childLayout="vertical">
+									<text id="army_black_exer" font="./data/font/calibri_18.fnt"
+										text="    E -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="vertical">
+									<text id="army_black_terr" font="./data/font/calibri_18.fnt"
+										text="      T -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="vertical">
+									<text id="army_black_cont" font="./data/font/calibri_18.fnt"
+										text="      C -" visible="false" />
+								</panel>
+							</panel>
+							<panel width="15%" childLayout="horizontal" paddingLeft="30px">
+								<panel width="25%" childLayout="center">
+									<image id="army_blue_stat" filename="./data/army/standby_army_blue_clear.png"
+										visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_blue_exer" font="./data/font/calibri_18.fnt"
+										text="    E -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_blue_terr" font="./data/font/calibri_18.fnt"
+										text="      T -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_blue_cont" font="./data/font/calibri_18.fnt"
+										text="      C -" visible="false" />
+								</panel>
+							</panel>
+							<panel width="15%" childLayout="horizontal" paddingLeft="30px">
+								<panel width="25%" childLayout="center">
+									<image id="army_green_stat" filename="./data/army/standby_army_green_clear.png"
+										visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_green_exer" font="./data/font/calibri_18.fnt"
+										text="    E -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_green_terr" font="./data/font/calibri_18.fnt"
+										text="      T -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_green_cont" font="./data/font/calibri_18.fnt"
+										text="      C -" visible="false" />
+								</panel>
+							</panel>
+							<panel width="15%" childLayout="horizontal" paddingLeft="30px">
+								<panel width="25%" childLayout="center">
+									<image id="army_red_stat" filename="./data/army/standby_army_red_clear.png"
+										visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_red_exer" font="./data/font/calibri_18.fnt"
+										text="    E -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_red_terr" font="./data/font/calibri_18.fnt"
+										text="      T -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_red_cont" font="./data/font/calibri_18.fnt"
+										text="      C -" visible="false" />
+								</panel>
+							</panel>
+							<panel width="15%" childLayout="horizontal" paddingLeft="30px">
+								<panel width="25%" childLayout="center">
+									<image id="army_white_stat" filename="./data/army/standby_army_white_clear.png"
+										visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_white_exer" font="./data/font/calibri_18.fnt"
+										text="    E -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_white_terr" font="./data/font/calibri_18.fnt"
+										text="      T -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_white_cont" font="./data/font/calibri_18.fnt"
+										text="      C -" visible="false" />
+								</panel>
+							</panel>
+							<panel width="15%" childLayout="horizontal" paddingLeft="30px">
+								<panel width="25%" childLayout="center">
+									<image id="army_yellow_stat" filename="./data/army/standby_army_yellow_clear.png"
+										visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_yellow_exer" font="./data/font/calibri_18.fnt"
+										text="    E -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_yellow_terr" font="./data/font/calibri_18.fnt"
+										text="      T -" visible="false" />
+								</panel>
+								<panel width="25%" childLayout="center">
+									<text id="army_yellow_cont" font="./data/font/calibri_18.fnt"
+										text="      C -" visible="false" />
+								</panel>
+							</panel>
+
+						</panel>
+
+					</panel>
+
+
+				</panel>
+			</panel>
+
+			<panel id="mid_panel" height="303px" valign="center"
+				childLayout="center">
+
+				<panel childLayout="vertical">
+					<panel width="100%" height="*" childLayout="center">
+						<image id="paused" filename="./data/menu/in-game/paused.png"
+							visible="false" />
+						
+					</panel>
+
+					<panel width="100%" height="36px" childLayout="center">
+						<image id="return" filename="./data/menu/in-game/button_return.png"
+							visible="false">
+							<effect>
+								<onStartHover name="nop" onStartEffect="setReturn()" />
+								<onEndHover name="nop" onStartEffect="setReturn()" />
+							</effect>
+							<interact onClick="returnGame()" />
+						</image>
+					</panel>
+					<panel height="20px" align="center" childLayout="center" />
+					<panel width="100%" height="36px" childLayout="center">
+						<image id="new_game" filename="./data/menu/in-game/button_new_game.png"
+							visible="false">
+							<effect>
+								<onStartHover name="nop" onStartEffect="setNewGame()" />
+								<onEndHover name="nop" onStartEffect="setNewGame()" />
+							</effect>
+							<interact onClick="newGame()" />
+						</image>
+					</panel>
+					<panel height="20px" align="center" childLayout="center" />
+					<panel width="100%" height="36px" childLayout="center">
+						<image id="exit" filename="./data/menu/initial/button_exit.png"
+							visible="false">
+							<effect>
+								<onStartHover name="nop" onStartEffect="setExit()" />
+								<onEndHover name="nop" onStartEffect="setExit()" />
+							</effect>
+							<interact onClick="exitGame()" />
+						</image>
+					</panel>
+				</panel>
+				<panel id="error_panel" childLayout="center" />
+			</panel>
+
+			<panel id="bottom_panel" height="177px" width="100%" valign="bottom"
+				childLayout="center">
+				<effect>
+					<onStartScreen name="move" timeType="exp" factor="0.5"
+						direction="bottom" mode="in" length="500" inherit="true" />
+				</effect>
+
+				<!-- Botões de seleção de quantidade de exércitos -->
+				<panel childLayout="vertical" width="140px" height="100%"
+					align="left">
+					<control id="RadioGroup-1" name="radioButtonGroup" />
+					<control id="RadioGroup-2" name="radioButtonGroup" />
+					<panel style="nifty-panel" childLayout="vertical" width="100%"
+						heigth="100%">
+						<control name="label" text="Unds. Atacantes" align="center" />
+						<panel childLayout="horizontal" align="center">
+							<panel childLayout="vertical">
+								<control name="radioButton" id="atk-option-1" group="RadioGroup-1" />
+							</panel>
+							<panel childLayout="vertical">
+								<control name="radioButton" id="atk-option-2" group="RadioGroup-1" />
+							</panel>
+							<panel childLayout="vertical">
+								<control name="radioButton" id="atk-option-3" group="RadioGroup-1" />
+							</panel>
+						</panel>
+
+						<panel childLayout="horizontal" align="center">
+							<control name="label" text="1" align="left" />
+							<control name="label" text="      2      " align="center" />
+							<control name="label" text="3" align="right" />
+						</panel>
+
+						<panel childLayout="horizontal" align="center">
+							<panel childLayout="vertical">
+								<control name="radioButton" id="mov-option-1" group="RadioGroup-2" />
+							</panel>
+							<panel childLayout="vertical">
+								<control name="radioButton" id="mov-option-2" group="RadioGroup-2" />
+							</panel>
+							<panel childLayout="vertical">
+								<control name="radioButton" id="mov-option-3" group="RadioGroup-2" />
+							</panel>
+						</panel>
+						<control name="label" text="Unds. Invasoras" align="center" />
+
+					</panel>
+				</panel>
+
+				<!-- Painel onde são exibidos os dados -->
+				<panel childLayout="vertical" valign="center">
+					<panel childLayout="horizontal" valign="top">
+						<panel id="atk-dice-1-panel" childLayout="center" height="58px"
+							width="58px">
+							<image id="atk-dice-1" filename="./data/dice/red.png"
+								visible="false" />
+						</panel>
+						<panel id="atk-dice-2-panel" childLayout="center" height="58px"
+							width="58px">
+							<image id="atk-dice-2" filename="./data/dice/red.png"
+								visible="false" />
+						</panel>
+						<panel id="atk-dice-3-panel" childLayout="center" height="58px"
+							width="58px">
+							<image id="atk-dice-3" filename="./data/dice/red.png"
+								visible="false" />
+						</panel>
+					</panel>
+					<panel childLayout="horizontal" valign="bottom">
+						<panel id="def-dice-1-panel" childLayout="center" height="58px"
+							width="58px">
+							<image id="def-dice-1" filename="./data/dice/yellow.png"
+								visible="false" />
+						</panel>
+						<panel id="def-dice-2-panel" childLayout="center" height="58px"
+							width="58px">
+							<image id="def-dice-2" filename="./data/dice/yellow.png"
+								visible="false" />
+						</panel>
+						<panel id="def-dice-3-panel" childLayout="center" height="58px"
+							width="58px">
+							<image id="def-dice-3" filename="./data/dice/yellow.png"
+								visible="false" />
+						</panel>
+					</panel>
+				</panel>
+
+
+				<!-- Botões de controle de fluxo de turno -->
+				<panel childLayout="vertical" style="nifty-panel" width="140px"
+					height="85%" align="right" valign="top">
+					<panel childLayout="center" height="*" align="center">
+						<control id="end_deploy_buton" width="100px" height="20px"
+							name="button" label="Fim Deploy" focusable="false" valign="center">
+							<interact onClick="endDeploy()" />
+						</control>
+					</panel>
+					<panel childLayout="center" height="*" align="center">
+						<control id="end_attack_buton" width="100px" height="20px"
+							name="button" label="Fim Ataque" focusable="false" valign="center">
+							<interact onClick="endAttack()" />
+						</control>
+					</panel>
+					<panel childLayout="center" height="*" align="center">
+						<control id="end_round_button" width="100px" height="20px"
+							name="button" label="Fim Remanej." focusable="false" valign="center">
+							<interact onClick="endRound()" />
+						</control>
+					</panel>
+					<panel childLayout="center" height="*" align="center">
+						<control id="show_goal_button" width="100px" height="20px"
+							name="button" label="Objetivo" focusable="false" valign="center">
+							<interact onClick="showGoal()" />
+						</control>
+					</panel>
+					<panel childLayout="center" height="*" align="center">
+						<control id="pause_button" width="100px" height="20px"
+							name="button" label="Pausa" focusable="false" valign="center">
+							<interact onClick="showMenuInGame()" />
+						</control>
+					</panel>
+				</panel>
+
+			</panel>
+
+		</layer>
+
+	</screen>
+
+
+	<!-- Popups da Tela Inicial -->
+
+	<popup id="configurePopup" childLayout="center" backgroundColor="#000a">
+		<panel style="nifty-panel" childLayout="vertical" width="60%"
+			height="75%">
+
+			<panel height="70px" width="95%" align="center" valign="top"
+				childLayout="center">
+				<text font="./data/font/calibri_18.fnt" text="Configuração de um novo jogo"
+					align="center" />
+			</panel>
+
+			<panel height="310px" width="55%" align="center" valign="center"
+				childLayout="vertical">
+				<control name="label" text="Human Players" align="center" />
+
+				<panel childLayout="horizontal" height="60px" paddingTop="10px">
+					<panel width="33%" childLayout="center">
+						<image id="army_black" filename="./data/army/standby_army_black_clear.png">
+<!-- 						    <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverBlack()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverBlack()" /> -->
+<!-- 							</effect> -->
+						   <interact onClick="setArmyBlack()" />
+						</image>
+					</panel>
+					<panel width="33%" childLayout="center">
+						<image id="army_blue" filename="./data/army/standby_army_blue_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverBlue()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverBlue()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyBlue()" />
+						</image>
+					</panel>
+					<panel width="33%" childLayout="center">
+						<image id="army_green" filename="./data/army/standby_army_green_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverGreen()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverGreen()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyGreen()" />
+						</image>
+					</panel>
+				</panel>
+
+				<panel childLayout="horizontal" height="55px">
+					<panel width="33%" childLayout="center">
+						<image id="army_red" filename="./data/army/standby_army_red_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverRed()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverRed()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyRed()" />
+						</image>
+					</panel>
+					<panel width="33%" childLayout="center">
+						<image id="army_white" filename="./data/army/standby_army_white_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverWhite()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverWhite()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyWhite()" />
+						</image>
+					</panel>
+					<panel width="33%" childLayout="center">
+						<image id="army_yellow" filename="./data/army/standby_army_yellow_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverYellow()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverYellow()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyYellow()" />
+						</image>
+					</panel>
+				</panel>
+
+				<control name="label" text="AI Players" align="center" />
+				<panel childLayout="horizontal" height="60px" paddingTop="10px">
+					<panel width="33%" childLayout="center">
+						<image id="army_black_AI" filename="./data/army/standby_army_black_clear.png">
+<!-- 						      <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverBlackAI()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverBlackAI()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyBlackAI()" />
+						</image>
+					</panel>
+					<panel width="33%" childLayout="center">
+						<image id="army_blue_AI" filename="./data/army/standby_army_blue_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverBlueAI()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverBlueAI()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyBlueAI()" />
+						</image>
+					</panel>
+					<panel width="33%" childLayout="center">
+						<image id="army_green_AI" filename="./data/army/standby_army_green_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverGreenAI()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverGreenAI()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyGreenAI()" />
+						</image>
+					</panel>
+				</panel>
+
+				<panel childLayout="horizontal" height="55px">
+					<panel width="33%" childLayout="center">
+						<image id="army_red_AI" filename="./data/army/standby_army_red_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverRedAI()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverRedAI()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyRedAI()" />
+						</image>
+					</panel>
+					<panel width="33%" childLayout="center">
+						<image id="army_white_AI" filename="./data/army/standby_army_white_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverWhiteAI()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverWhiteAI()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyWhiteAI()" />
+						</image>
+					</panel>
+					<panel width="33%" childLayout="center">
+						<image id="army_yellow_AI" filename="./data/army/standby_army_yellow_clear.png">
+<!-- 						     <effect> -->
+<!-- 								<onStartHover name="nop" onStartEffect="mouseOverYellowAI()" /> -->
+<!-- 								<onEndHover name="nop" onStartEffect="mouseOverYellowAI()" /> -->
+<!-- 							</effect> -->
+							<interact onClick="setArmyYellowAI()" />
+						</image>
+					</panel>
+				</panel>
+
+				<panel childLayout="horizontal" height="50px">
+					<panel width="*" childLayout="center">
+						<text font="./data/font/calibri_18.fnt" text="Nível da AI">
+						</text>
+					</panel>
+					<panel id="AI_levelBar" width="152px" childLayout="horizontal">
+						<panel width="33%" childLayout="center">
+							<image id="COMPUTER_EASY" filename="./data/menu/initial/AI_bar_EASY.png">
+							</image>
+						</panel>
+						<panel width="33%" childLayout="center">
+							<image id="COMPUTER_NORMAL"
+								filename="./data/menu/initial/AI_bar_NORMAL_deselected.png">
+								<interact onClick="setNormal()" />
+							</image>
+						</panel>
+						<panel width="33%" childLayout="center">
+							<image id="COMPUTER_HARD" filename="./data/menu/initial/AI_bar_HARD_deselected.png">
+								<interact onClick="setHard()" />
+							</image>
+						</panel>
+					</panel>
+				</panel>
+
+			</panel>
+
+			<panel height="20px" width="95%" align="center" valign="bottom"
+				childLayout="horizontal">
+				<panel width="50%" align="left" childLayout="center">
+					<control id="cancelConfigureButton" width="100px" height="20px"
+						name="button" label="Voltar" focusable="false">
+						<interact onClick="closeConfigureGame()" />
+					</control>
+				</panel>
+				<panel width="50%" align="right" childLayout="center">
+					<control id="startGameButton" width="100px" height="20px"
+						name="button" label="Iniciar" focusable="false">
+						<interact onClick="startGame()" />
+					</control>
+				</panel>
+			</panel>
+		</panel>
+	</popup>
+
+	<popup id="errorPopup" childLayout="center" backgroundColor="#000a">
+		<panel style="nifty-panel" childLayout="vertical" width="25%"
+			height="20%">
+			<panel height="80%" width="95%" align="center" valign="top"
+				childLayout="center">
+				<text id="textError" font="./data/font/calibri_18.fnt" text="Cor já selecionada"
+					align="center" valign="center" />
+			</panel>
+			<panel height="20px" width="35%" align="center" valign="bottom"
+				childLayout="center">
+				<control id="closeError" width="100px" height="20px" name="button"
+					label="Ok" focusable="false">
+					<interact onClick="closeError()" />
+				</control>
+			</panel>
+		</panel>
+	</popup>
+
+	<popup id="errorPopup1" childLayout="center" backgroundColor="#000a">
+		<panel style="nifty-panel" childLayout="vertical" width="25%"
+			height="20%">
+			<panel height="80%" width="95%" align="center" valign="top"
+				childLayout="center">
+				<text id="textError" font="./data/font/calibri_18.fnt" text="Players insuficientes"
+					align="center" valign="center" />
+			</panel>
+			<panel height="20px" width="35%" align="center" valign="bottom"
+				childLayout="center">
+				<control id="closeError" width="100px" height="20px" name="button"
+					label="Ok" focusable="false">
+					<interact onClick="closeError1()" />
+				</control>
+			</panel>
+		</panel>
+	</popup>
+
+	<popup id="errorPopup2" childLayout="center" backgroundColor="#000a">
+		<panel style="nifty-panel" childLayout="vertical" width="25%"
+			height="20%">
+			<panel height="80%" width="95%" align="center" valign="top"
+				childLayout="center">
+				<text id="textError" font="./data/font/calibri_18.fnt" text="Nenhum AI Player selecionado"
+					align="center" valign="center" />
+			</panel>
+			<panel height="20px" width="35%" align="center" valign="bottom"
+				childLayout="center">
+				<control id="closeError" width="100px" height="20px" name="button"
+					label="Ok" focusable="false">
+					<interact onClick="closeError2()" />
+				</control>
+			</panel>
+		</panel>
+	</popup>
+
+	<popup id="helpPopup" childLayout="center" backgroundColor="#000a">
+		<panel style="nifty-panel" childLayout="vertical" width="60%"
+			height="75%">
+			<panel height="90%" width="95%" align="center" valign="top"
+				childLayout="vertical">
+				<panel align="center" valign="center" childLayout="center"
+					paddingTop="20px">
+					<text font="./data/font/calibri_18.fnt" text="Ajuda" align="center"
+						valign="center" />
+				</panel>
+				<panel align="center" valign="center" childLayout="vertical"
+					paddingTop="30px">
+					<text font="./data/font/calibri_18.fnt" text="-Configuração de um novo jogo-"
+						align="center" valign="center" />
+					<panel height="7px" />
+					<text font="./data/font/calibri_18.fnt" align="center" valign="center"
+						text="Para iniciar um novo jogo deve-se selecionar a quantidade e as respectivas cores" />
+					<text font="./data/font/calibri_18.fnt" align="center" valign="center"
+						text="dos Palyers -Humano- e AI Players -Computador-. " />
+					<panel height="7px" />
+					<image id="logo" filename="./data/menu/initial/armies.png"
+						align="center" valign="center" />
+					<panel height="7px" />
+					<text font="./data/font/calibri_18.fnt" align="center" valign="center"
+						text="No caso de se ter escolhido um AI PLayer, deve-se selecionar o nível da AI desejado." />
+					<panel height="7px" />
+					<image id="logo" filename="./data/menu/initial/AI_bar_1.png"
+						align="center" valign="center" />
+					<panel height="10px" />
+					<text font="./data/font/calibri_18.fnt" text="-Durante o jogo-"
+						align="center" valign="center" />
+					<panel height="7px" />
+					<text font="./data/font/calibri_18.fnt" align="center" valign="center"
+						text="O jogo segue as regras básicas do WAR clássico*. Dividindo-se em 3 etapas, Deploy" />
+					<text font="./data/font/calibri_18.fnt" align="center" valign="center"
+						text="-Posicionamento-, Attack -Ataque-, Movement -Remanejamento-." />
+					<text font="./data/font/calibri_18.fnt" align="center" valign="center"
+						text="Os objetivos de cada jogador pode ser visto em -Objetivo-. Vence quem conseguir" />
+					<text font="./data/font/calibri_18.fnt" align="center" valign="center"
+						text="conquistar seu objetivo primeiro." />
+					<panel height="13px" />
+					<text font="./data/font/calibri_18.fnt" align="center" valign="center"
+						text="*Os territórios inicialmente pertecentes à cada jogador são distribuídos aleatoriamente." />
+				</panel>
+
+			</panel>
+			<panel height="20px" width="35%" align="center" valign="bottom"
+				childLayout="center">
+				<control id="closeHelpButton" width="100px" height="20px"
+					name="button" label="Voltar" focusable="false">
+					<interact onClick="closeHelp()" />
+				</control>
+			</panel>
+		</panel>
+	</popup>
+
+	<popup id="creditsPopup" childLayout="center" backgroundColor="#000a">
+		<panel style="nifty-panel" childLayout="vertical" width="60%"
+			height="75%">
+
+			<panel height="90%" width="95%" align="center" valign="top"
+				childLayout="vertical">
+				<panel align="center" valign="center" childLayout="center"
+					paddingTop="20px">
+					<text font="./data/font/calibri_18.fnt" text="Créditos" align="center"
+						valign="center" />
+				</panel>
+				<panel align="center" valign="center" childLayout="center"
+					paddingTop="30px">
+					<text font="./data/font/calibri_18.fnt" text="Software desenvolvido pela equipe"
+						align="center" valign="center" />
+				</panel>
+				<panel align="center" valign="center" childLayout="center">
+					<image id="logo" filename="./data/menu/initial/G3Software.png"
+						align="center" valign="center" />
+				</panel>
+				<panel align="center" valign="center" childLayout="vertical"
+					paddingTop="20px">
+					<text font="./data/font/calibri_18.fnt" text="Desenvolvimento"
+						align="center" valign="center" />
+					<panel height="7px" />
+					<text font="./data/font/calibri_18.fnt" text="Diego Fernando Freitas Lima dos Santos"
+						align="center" valign="center" />
+					<text font="./data/font/calibri_18.fnt" text="Elise Garcia"
+						align="center" valign="center" />
+					<text font="./data/font/calibri_18.fnt" text="Lucas Corte Real Saldanha"
+						align="center" valign="center" />
+					<text font="./data/font/calibri_18.fnt" text="Pedro Vitor Pedroza Freitas"
+						align="center" valign="center" />
+					<text font="./data/font/calibri_18.fnt" text="Priscilla Mafra"
+						align="center" valign="center" />
+					<text font="./data/font/calibri_18.fnt" text="Wladimir Cabral"
+						align="center" valign="center" />
+				</panel>
+				<panel align="center" valign="center" childLayout="vertical"
+					paddingTop="25px">
+					<text font="./data/font/calibri_18.fnt" text="Gerência" align="center"
+						valign="center" />
+					<panel height="7px" />
+					<text font="./data/font/calibri_18.fnt" text="Lucas Corte Real Saldanha"
+						align="center" valign="center" />
+				</panel>
+			</panel>
+
+			<panel height="20px" width="35%" align="center" valign="bottom"
+				childLayout="center">
+				<control id="closeCreditsButton" width="100px" height="20px"
+					name="button" label="Voltar" focusable="false">
+					<interact onClick="closeCredits()" />
+				</control>
+			</panel>
+		</panel>
+	</popup>
+
+	<popup id="exitPopup" childLayout="center" backgroundColor="#000a">
+		<panel style="nifty-panel" childLayout="vertical" width="25%"
+			height="20%">
+			<panel childLayout="center" width="100%" height="70%" align="center">
+				<text font="./data/font/calibri_18.fnt" text="Sair do jogo?" />
+			</panel>
+			<panel childLayout="horizontal" width="100%" height="*">
+				<panel childLayout="center" width="50%">
+					<control id="confirmExitButton" width="100px" height="20px"
+						name="button" label="Sim" align="center" focusable="false">
+						<interact onClick="confirmExit()" />
+					</control>
+				</panel>
+				<panel childLayout="center" width="50%">
+					<control id="cancelExitButton" width="100px" height="20px"
+						name="button" label="Nao" align="center" focusable="false">
+						<interact onClick="cancelExit()" />
+					</control>
+				</panel>
+			</panel>
+
+		</panel>
+	</popup>
+
+</nifty>
