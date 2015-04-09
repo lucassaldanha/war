@@ -1,16 +1,15 @@
 package war.ui.entity;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-
 import war.game.GameController;
 import war.game.domain.Terrain;
 import war.game.domain.impl.TerrainImpl;
 import war.ui.component.interaction.ClickableComponent;
 import war.ui.component.render.ArmyImageRenderComponent;
+
+import java.util.Observable;
+import java.util.Observer;
 
 public class TerrainEntity extends Entity implements Observer {
 
@@ -26,7 +25,7 @@ public class TerrainEntity extends Entity implements Observer {
 		try {
 			this.cc = new ArmyImageRenderComponent(this, new Image(
 					String.format("./data/army/standby_army_%s.png", terrain
-							.getOwner().getColor())));
+							.getOwner().getColor().getName())));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -44,11 +43,11 @@ public class TerrainEntity extends Entity implements Observer {
 					.requestSelectedTerrain())) {
 				this.cc.setImage(new Image(String.format(
 						"./data/army/selected_army_%s.png", terrain.getOwner()
-								.getColor())/* , Color.white */));
+								.getColor().getName())/* , Color.white */));
 			} else {
 				this.cc.setImage(new Image(String.format(
 						"./data/army/standby_army_%s.png", terrain.getOwner()
-								.getColor())/* , Color.white */));
+								.getColor().getName())/* , Color.white */));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
