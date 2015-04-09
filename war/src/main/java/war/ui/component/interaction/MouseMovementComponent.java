@@ -33,8 +33,8 @@ public class MouseMovementComponent extends MovementComponent {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sb, int delta) {
 		if (canMove && gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			setPosition(gc.getInput().getAbsoluteMouseX() - imageSizeX / 2, gc
-					.getInput().getAbsoluteMouseY() - imageSizeY / 2);
+			setPosition(gc.getInput().getMouseX() - imageSizeX / 2, gc
+					.getInput().getMouseY() - imageSizeY / 2);
 		}
 	}
 
