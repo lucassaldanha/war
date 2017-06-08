@@ -24,7 +24,7 @@
 		<!-- Versões de bibliotecas -->
 		<natives.version>0.0.6</natives.version>
 		<lwjgl.version>2.6</lwjgl.version>
-		<nifty.version>1.3.2</nifty.version>
+		<nifty.version>1.4.2</nifty.version>
 		<slick.version>20101219</slick.version>
 		<jgrapht.version>0.8.3</jgrapht.version>
 		<jdom.version>2.0.2</jdom.version>
@@ -70,32 +70,33 @@
 		</dependency>
 
 		<dependency>
-			<groupId>slick</groupId>
-			<artifactId>slick</artifactId>
-			<version>${slick.version}</version>
+			<groupId>org.slick2d</groupId>
+			<artifactId>slick2d-core</artifactId>
+			<version>1.0.2</version>
 		</dependency>
 
+
 		<dependency>
-			<groupId>lessvoid</groupId>
+			<groupId>com.github.nifty-gui</groupId>
 			<artifactId>nifty</artifactId>
 			<version>${nifty.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>lessvoid</groupId>
+			<groupId>com.github.nifty-gui</groupId>
 			<artifactId>nifty-style-black</artifactId>
 			<version>${nifty.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>lessvoid</groupId>
+			<groupId>com.github.nifty-gui</groupId>
 			<artifactId>nifty-default-controls</artifactId>
 			<version>${nifty.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>lessvoid</groupId>
-			<artifactId>nifty-slick-renderer</artifactId>
+			<groupId>com.github.nifty-gui</groupId>
+			<artifactId>nifty-slick2d-renderer</artifactId>
 			<version>${nifty.version}</version>
 			<exclusions>
 				<exclusion>
@@ -106,7 +107,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>lessvoid</groupId>
+			<groupId>com.github.nifty-gui</groupId>
 			<artifactId>nifty-lwjgl-renderer</artifactId>
 			<version>${nifty.version}</version>
 		</dependency>

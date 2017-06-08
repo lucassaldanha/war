@@ -111,13 +111,13 @@ public class StartGameScreenController extends AbstractScreenController {
 	public void setSound() {
 		Element sound = screen.findElementByName("sound");		
 		if(sound_on){		
-			newImage = nifty.getRenderEngine().createImage("./data/menu/initial/button_sound_off.png", false);			
+			newImage = nifty.getRenderEngine().createImage(screen, "./data/menu/initial/button_sound_off.png", false);
 			sound.getRenderer(ImageRenderer.class).setImage(newImage);		
 //			music.stop();
 			sound_on = false;
 		}
 		else{
-			newImage = nifty.getRenderEngine().createImage("./data/menu/initial/button_sound_on.png", false);			
+			newImage = nifty.getRenderEngine().createImage(screen, "./data/menu/initial/button_sound_on.png", false);
 			sound.getRenderer(ImageRenderer.class).setImage(newImage);
 //			music.play();
 			sound_on = true;
@@ -136,14 +136,14 @@ public class StartGameScreenController extends AbstractScreenController {
 	
 	public void deselectAI(String level){
 		AI_bar = screen.findElementByName(String.format("COMPUTER_%s", level));
-		newImage = nifty.getRenderEngine().createImage(String.format("./data/menu/initial/AI_bar_%s_deselected.png", level), false);
+		newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/menu/initial/AI_bar_%s_deselected.png", level), false);
 		AI_bar.getRenderer(ImageRenderer.class).setImage(newImage);	//deseleciona a parte da barra correspodente à COMPUTER level
 		AI_bar.setVisibleToMouseEvents(false);		//não deixa selecionar esse nível novamente		
 	}
 	
 	public void selectAI(String level){
 		AI_bar = screen.findElementByName(String.format("COMPUTER_%s", level));
-		newImage = nifty.getRenderEngine().createImage(String.format("./data/menu/initial/AI_bar_%s.png", level), false);
+		newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/menu/initial/AI_bar_%s.png", level), false);
 		AI_bar.getRenderer(ImageRenderer.class).setImage(newImage);	//seleciona a parte da barra correspodente à COMPUTER level
 		AI_bar.setVisibleToMouseEvents(false);	//não deixa deselecionar esse nível novamente		
 	}		
@@ -193,12 +193,12 @@ public class StartGameScreenController extends AbstractScreenController {
 		army = screen.findElementByName(String.format("army_%s", color.getName()));
 		
 		if(!down){
-			newImage = nifty.getRenderEngine().createImage(String.format("./data/army/standby_army_%s.png", color.getName()), false);
+			newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/army/standby_army_%s.png", color.getName()), false);
 			army.getRenderer(ImageRenderer.class).setImage(newImage);
 			down = true;			
 		}
 		else{
-			newImage = nifty.getRenderEngine().createImage(String.format("./data/army/standby_army_%s_clear.png", color.getName()), false);			
+			newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/army/standby_army_%s_clear.png", color.getName()), false);
 			army.getRenderer(ImageRenderer.class).setImage(newImage);			
 			down = false;
 		}	
@@ -209,12 +209,12 @@ public class StartGameScreenController extends AbstractScreenController {
 		army = screen.findElementByName(String.format("army_%s_AI", color.getName()));
 		
 		if(!down){
-			newImage = nifty.getRenderEngine().createImage(String.format("./data/army/standby_army_%s.png", color.getName()), false);
+			newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/army/standby_army_%s.png", color.getName()), false);
 			army.getRenderer(ImageRenderer.class).setImage(newImage);
 			down = true;			
 		}
 		else{
-			newImage = nifty.getRenderEngine().createImage(String.format("./data/army/standby_army_%s_clear.png", color.getName()), false);			
+			newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/army/standby_army_%s_clear.png", color.getName()), false);
 			army.getRenderer(ImageRenderer.class).setImage(newImage);			
 			down = false;
 		}	
@@ -227,7 +227,7 @@ public class StartGameScreenController extends AbstractScreenController {
 		army = screen.findElementByName(String.format("army_%s", color.getName()));			
 		ArmySelected player = new ArmySelected(army,color);
 		playersHUMAN.add(player);		
-		newImage = nifty.getRenderEngine().createImage(String.format("./data/army/standby_army_%s.png", color.getName()), false);
+		newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/army/standby_army_%s.png", color.getName()), false);
 		army.getRenderer(ImageRenderer.class).setImage(newImage);				//setta a imagem do army selecionado
 		army.setVisibleToMouseEvents(false);		//não deixa deselecionar o army		
 	}
@@ -237,7 +237,7 @@ public class StartGameScreenController extends AbstractScreenController {
 		army = screen.findElementByName(String.format("army_%s_AI", color.getName()));
 		ArmySelected player = new ArmySelected(army,color);
 		players.add(player);		
-		newImage = nifty.getRenderEngine().createImage(String.format("./data/army/standby_army_%s.png", color.getName()), false);
+		newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/army/standby_army_%s.png", color.getName()), false);
 		army.getRenderer(ImageRenderer.class).setImage(newImage);				
 		army.setVisibleToMouseEvents(false);	
 	}		
@@ -393,7 +393,7 @@ public class StartGameScreenController extends AbstractScreenController {
 		int i = 0;		
 		while(i < playersHUMAN.size()){
 			ArmyColor color = playersHUMAN.get(i).getColor();
-			newImage = nifty.getRenderEngine().createImage(String.format("./data/army/standby_army_%s_clear.png",color.getName()), false);
+			newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/army/standby_army_%s_clear.png",color.getName()), false);
 			Element army = playersHUMAN.get(i).getArmy();			
 			army.getRenderer(ImageRenderer.class).setImage(newImage);		
 			army.setVisibleToMouseEvents(true);
@@ -409,7 +409,7 @@ public class StartGameScreenController extends AbstractScreenController {
 		int i = 0;		
 		while(i < players.size()){
 			ArmyColor color = players.get(i).getColor();
-			newImage = nifty.getRenderEngine().createImage(String.format("./data/army/standby_army_%s_clear.png", color.getName()), false);
+			newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/army/standby_army_%s_clear.png", color.getName()), false);
 			Element army = players.get(i).getArmy();			
 			army.getRenderer(ImageRenderer.class).setImage(newImage);
 			army.setVisibleToMouseEvents(true);
@@ -423,14 +423,14 @@ public class StartGameScreenController extends AbstractScreenController {
 	//Limpa AI
 	public void clearAI(String level){
 		AI_bar = screen.findElementByName(String.format("COMPUTER_%s", level));
-		newImage = nifty.getRenderEngine().createImage(String.format("./data/menu/initial/AI_bar_%s_deselected.png", level), false);
+		newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/menu/initial/AI_bar_%s_deselected.png", level), false);
 		AI_bar.getRenderer(ImageRenderer.class).setImage(newImage);	//seleciona a parte da barra correspodente à COMPUTER level
 		AI_bar.setVisibleToMouseEvents(true);	//deixa deselecionar esse nível novamente	
 	}
 	
 	public void clearAI_EASY(){
 		AI_bar = screen.findElementByName("COMPUTER_EASY");
-		newImage = nifty.getRenderEngine().createImage("./data/menu/initial/AI_bar_EASY", false);
+		newImage = nifty.getRenderEngine().createImage(screen, "./data/menu/initial/AI_bar_EASY", false);
 		AI_bar.getRenderer(ImageRenderer.class).setImage(newImage);	//seleciona a parte da barra correspodente à COMPUTER level		
 		AI_bar.setVisibleToMouseEvents(true);	//deixa deselecionar esse nível novamente	
 	}

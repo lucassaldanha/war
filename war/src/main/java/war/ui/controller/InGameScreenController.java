@@ -68,10 +68,9 @@ public class InGameScreenController extends AbstractScreenController implements
 
 	@Override
 	public void onStartScreen() {
-
 		exitPopup = nifty.createPopup("exitPopup");
 
-		diceImages = new DiceImage(nifty);
+		diceImages = new DiceImage(nifty, screen);
 
 		gc.addObserver(this);
 
@@ -216,7 +215,7 @@ public class InGameScreenController extends AbstractScreenController implements
 	public void showPlayersStat(ArmyColor color, int num1, int num2, int num3) {
 		army = screen.findElementByName(String.format("army_%s_stat",
 				color.getName()));
-		newImage = nifty.getRenderEngine().createImage(
+		newImage = nifty.getRenderEngine().createImage(screen,
 				String.format("./data/army/standby_army_%s.png",
 						color.getName()), false);
 		army.getRenderer(ImageRenderer.class).setImage(newImage);
@@ -282,7 +281,7 @@ public class InGameScreenController extends AbstractScreenController implements
 
 			down = false;
 		} else {
-			newImage = nifty.getRenderEngine().createImage(
+			newImage = nifty.getRenderEngine().createImage(screen,
 					String.format("./data/menu/statistic/%s_down.png", name),
 					false);
 			button.getRenderer(ImageRenderer.class).setImage(newImage);

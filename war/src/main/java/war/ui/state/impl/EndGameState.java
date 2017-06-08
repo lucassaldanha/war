@@ -12,22 +12,19 @@ import de.lessvoid.nifty.Nifty;
 public class EndGameState extends AbstractGameState {
 
 	@Override
-	public void enterState(GameContainer arg0, StateBasedGame arg1)
-			throws SlickException {
+	public void enterState(GameContainer arg0, StateBasedGame arg1) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void initGameAndGUI(GameContainer arg0, StateBasedGame arg1)
-			throws SlickException {
+	public void initGameAndGUI(GameContainer arg0, StateBasedGame arg1) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void leaveState(GameContainer arg0, StateBasedGame arg1)
-			throws SlickException {
+	public void leaveState(GameContainer arg0, StateBasedGame arg1) {
 		// TODO Auto-generated method stub
 
 	}
@@ -39,15 +36,13 @@ public class EndGameState extends AbstractGameState {
 	}
 
 	@Override
-	public void renderGame(GameContainer arg0, StateBasedGame arg1,
-			Graphics arg2) throws SlickException {
+	public void renderGame(GameContainer arg0, StateBasedGame arg1, Graphics arg2) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void updateGame(GameContainer arg0, StateBasedGame arg1, int arg2)
-			throws SlickException {
+	public void updateGame(GameContainer arg0, StateBasedGame arg1, int arg2) {
 		// TODO Auto-generated method stub
 
 	}

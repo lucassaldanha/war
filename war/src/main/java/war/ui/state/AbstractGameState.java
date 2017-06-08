@@ -21,8 +21,7 @@ public abstract class AbstractGameState extends NiftyOverlayBasicGameState {
 	static boolean started = false;
 
 	@Override
-	public void initGameAndGUI(GameContainer container, StateBasedGame game)
-			throws SlickException {
+	public void initGameAndGUI(GameContainer container, StateBasedGame game) {
 		initNifty(container, game, new PlainSlickInputSystem());
 //		getNifty().setDebugOptionPanelColors(true);
 	}
@@ -33,13 +32,11 @@ public abstract class AbstractGameState extends NiftyOverlayBasicGameState {
 	}
 
 	@Override
-	public void enterState(GameContainer container, StateBasedGame game)
-			throws SlickException {
+	public void enterState(GameContainer container, StateBasedGame game) {
 	}
 
 	@Override
-	public void leaveState(GameContainer container, StateBasedGame game)
-			throws SlickException {
+	public void leaveState(GameContainer container, StateBasedGame game) {
 	}
 
 	public void addEntity(Entity e) {
@@ -51,16 +48,14 @@ public abstract class AbstractGameState extends NiftyOverlayBasicGameState {
 	}
 
 	@Override
-	public void renderGame(GameContainer container, StateBasedGame game,
-			Graphics g) throws SlickException {
+	public void renderGame(GameContainer container, StateBasedGame game, Graphics g) {
 		for (Entity e : entities) {
 			e.render(container, game, g);
 		}
 	}
 
 	@Override
-	protected void updateGame(GameContainer container, StateBasedGame game,
-			int delta) throws SlickException {
+	protected void updateGame(GameContainer container, StateBasedGame game, int delta) {
 		for (Entity e : entities) {
 		    e.update(container, game);
 		}

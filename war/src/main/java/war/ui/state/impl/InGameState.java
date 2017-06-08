@@ -10,8 +10,7 @@ import war.ui.state.GameStates;
 public class InGameState extends AbstractGameState {
 
 	@Override
-	public void enterState(GameContainer container, StateBasedGame game)
-			throws SlickException {
+	public void enterState(GameContainer container, StateBasedGame game) {
 		super.enterState(container, game);
 		getNifty().gotoScreen("in_game");
 	}

@@ -62,9 +62,9 @@ public class NotificationCenter {
 			}
 		}.build(nifty, screen, topPanelGUI);
 
-		topPanelGUI.add(infoMsg);
+		topPanelGUI.addChild(infoMsg);
 
-		infoMsg.findElementByName("infoMsg_text")
+		infoMsg.findElementById("infoMsg_text")
 				.getRenderer(TextRenderer.class).setText(msg);
 
 		infoMsg.setVisible(true);
@@ -115,10 +115,10 @@ public class NotificationCenter {
 				}
 			}.build(nifty, screen, midPanelGUI);
 
-			midPanelGUI.add(errorMsg);
+			midPanelGUI.addChild(errorMsg);
 		}
 
-		errorMsg.findElementByName("errorMsg_text")
+		errorMsg.findElementById("errorMsg_text")
 				.getRenderer(TextRenderer.class).setText(msg);
 
 		errorMsg.setVisible(true);

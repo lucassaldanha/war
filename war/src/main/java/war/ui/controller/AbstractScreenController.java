@@ -60,12 +60,12 @@ public abstract class AbstractScreenController implements ScreenController {
 	public boolean overButton(String name, boolean down, String menu){
 		Element button = screen.findElementByName(name);
 		if(!down){
-			newImage = nifty.getRenderEngine().createImage(String.format("./data/menu/%s/button_%s_down.png", menu, name), false);
+			newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/menu/%s/button_%s_down.png", menu, name), false);
 			button.getRenderer(ImageRenderer.class).setImage(newImage);
 			down = true;			
 		}
 		else{
-			newImage = nifty.getRenderEngine().createImage(String.format("./data/menu/%s/button_%s.png", menu, name), false);			
+			newImage = nifty.getRenderEngine().createImage(screen, String.format("./data/menu/%s/button_%s.png", menu, name), false);
 			button.getRenderer(ImageRenderer.class).setImage(newImage);			
 			down = false;
 		}	
